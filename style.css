@@ -138,3 +138,7 @@ button:hover {
 .text-formatting button:hover {
     background-color: #ccc;
 }
+#journal-input:empty:before {
+    content: attr(placeholder);
+    color: gray;
+}
