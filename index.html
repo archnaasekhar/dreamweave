@@ -7,15 +7,31 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="controls">
-        <input type="text" id="journal-title" placeholder="Enter journal title here">
-        <div class="text-formatting">
-            <button onclick="formatText('bold')"><b>B</b></button>
-            <button onclick="formatText('italic')"><i>I</i></button>
-            <button onclick="formatText('underline')"><u>U</u></button>
-            <input type="color" id="color-picker" onchange="changeTextColor()" title="Change text color">
+
+    <center>
+        <h2>Hei... There</h2>
+    </center>
+    <div>
+        <div class="controls">
+            <input type="text" id="journal-title" placeholder="Enter journal title here">
+            <div class="text-formatting">
+                <button onclick="formatText('bold')"><b>B</b></button>
+                <button onclick="formatText('italic')"><i>I</i></button>
+                <button onclick="formatText('underline')"><u>U</u></button>
+                <input type="color" id="color-picker" onchange="changeTextColor()" title="Change text color">
+            </div>
+            
+    
+    
+            <div id="journal-input" contenteditable="true" placeholder="Write your journal entry here"></div>
+    
+    
+            <div class="button-container">
+                <button id="dark-mode-toggle">Switch Mode</button>
+                <button id="save-btn">Save Entries</button>
+            </div>
         </div>
-        
+
 
 
         <div id="journal-input" contenteditable="true" placeholder="Write your journal entry here"></div>
@@ -26,10 +42,17 @@
             <button id="save-btn">Save Entries</button>
         </div>
     </div>
+
     <div id="calendar-container">
-        
+            
         <div id="calendar"></div>
+
     </div>
+
+    </div>
+
+
+
 
     <div id="entries-container">
         <!-- Journal entries will appear here -->
