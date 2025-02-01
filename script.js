@@ -1,85 +1,91 @@
-// script.js
+// Handle adding a new journal entry when Enter is pressed
+document.getElementById('journal-input').addEventListener('keydown', function(event) {
+    if (event.key === 'Enter' && !event.shiftKey) {  // Check for Enter without Shift (for multiline)
+        event.preventDefault(); // Prevent the default Enter action (new line)
 
-// Handle delete button functionality
-document.querySelectorAll('.delete-btn').forEach(button => {
-    button.addEventListener('click', function() {
-        this.closest('.entry').remove();
-    });
-});
+        const journalTitle = document.getElementById('journal-title').value; // Get title
+        const journalContent = document.getElementById('journal-input').value; // Get journal content
+        
+        if (journalTitle.trim() === '' || journalContent.trim() === '') {
+            alert('Please enter both a title and content.');
+            return;
+        }
 
-// Handle adding a new journal entry
-document.getElementById('add-entry-btn').addEventListener('click', function() {
-    const journalContent = document.getElementById('journal-input').value;
-    if (journalContent.trim() === '') {
-        alert('Please enter some text.');
-        return;
-    }
+        // Create the new entry container
+        const entryContainer = document.createElement('div');
+        entryContainer.classList.add('entry');
 
-    const entryContainer = document.createElement('div');
-    entryContainer.classList.add('entry');
+        const timestamp = new Date().toLocaleString();
 
-    const timestamp = new Date().toLocaleString();
+        // Create the delete button
+        const deleteButton = document.createElement('button');
+        deleteButton.classList.add('delete-btn');
+        deleteButton.innerText = "Delete";
 
-    const newEntry = `
-        <p>${journalContent}</p>
-        <p class="timestamp">${timestamp}</p>
-        <button class="delete-btn">Delete</button>
-    `;
+        // Add event listener to the delete button
+        deleteButton.addEventListener('click', function() {
+            entryContainer.remove(); // Removes the entry when delete button is clicked
+            saveEntriesToLocalStorage(); // Re-save entries to localStorage
+        });
 
-    entryContainer.innerHTML = newEntry;
-    document.getElementById('entries-container').appendChild(entryContainer);
+        // Add the new entry content (including title)
+        entryContainer.innerHTML = `
+            <h3 class="entry-title">${journalTitle}</h3>
+            <p>${journalContent}</p>
+            <p class="timestamp">${timestamp}</p>
+        `;
 
-    // Clear the input field after adding the entry
-    document.getElementById('journal-input').value = '';
+        // Append the delete button to the entry container
+        entryContainer.appendChild(deleteButton);
 
-    // Re-attach delete functionality to the new entry
-    entryContainer.querySelector('.delete-btn').addEventListener('click', function() {
-        this.closest('.entry').remove();
-    });
-});
+        // Append the entry to the container
+        document.getElementById('entries-container').appendChild(entryContainer);
 
-// Toggle dark mode
-document.getElementById('dark-mode-toggle').addEventListener('click', function() {
-    document.body.classList.toggle('dark-mode');
-    const isDarkMode = document.body.classList.contains('dark-mode');
-    localStorage.setItem('darkMode', isDarkMode); // Save the theme preference
-});
+        // Clear the input fields after adding the entry
+        document.getElementById('journal-title').value = '';
+        document.getElementById('journal-input').value = '';
 
-// Load dark mode preference from localStorage
-window.addEventListener('DOMContentLoaded', () => {
-    const darkMode = localStorage.getItem('darkMode') === 'true';
-    if (darkMode) {
-        document.body.classList.add('dark-mode');
+        // Save entries to localStorage
+        saveEntriesToLocalStorage();
     }
 });
 
-// Save all journal entries to local storage
-document.getElementById('save-btn').addEventListener('click', function() {
+// Save all journal entries to localStorage
+function saveEntriesToLocalStorage() {
     const entries = [];
     document.querySelectorAll('.entry').forEach(entry => {
+        const title = entry.querySelector('.entry-title').innerText;
         const content = entry.querySelector('p').innerText;
         const timestamp = entry.querySelector('.timestamp').innerText;
-        entries.push({ content, timestamp });
+        entries.push({ title, content, timestamp });
     });
     localStorage.setItem('entries', JSON.stringify(entries));
-});
+}
 
-// Load saved journal entries from localStorage
+// Load saved journal entries from localStorage on page load
 window.addEventListener('DOMContentLoaded', () => {
     const savedEntries = JSON.parse(localStorage.getItem('entries')) || [];
     savedEntries.forEach(entry => {
         const entryContainer = document.createElement('div');
         entryContainer.classList.add('entry');
+
+        const deleteButton = document.createElement('button');
+        deleteButton.classList.add('delete-btn');
+        deleteButton.innerText = "Delete";
+
+        // Add delete button event listener
+        deleteButton.addEventListener('click', function() {
+            entryContainer.remove();
+            saveEntriesToLocalStorage(); // Re-save the updated entries
+        });
+
         entryContainer.innerHTML = `
+            <h3 class="entry-title">${entry.title}</h3>
             <p>${entry.content}</p>
             <p class="timestamp">${entry.timestamp}</p>
-            <button class="delete-btn">Delete</button>
         `;
+        
+        entryContainer.appendChild(deleteButton);
         document.getElementById('entries-container').appendChild(entryContainer);
-
-        // Re-attach delete functionality to the loaded entries
-        entryContainer.querySelector('.delete-btn').addEventListener('click', function() {
-            this.closest('.entry').remove();
-        });
     });
 });
