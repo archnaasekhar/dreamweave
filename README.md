@@ -6,7 +6,3 @@ Dreamweave is a simple, offline journaling website where users can write and sav
 - Write and save journal entries.
 - Fully offline functionality.
 
-## How to Use:
-1. Clone the repository to your local machine:
-   ```bash
-   git clone https://github.com/archnaasekhar/Dreamweave.git
