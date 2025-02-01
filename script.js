@@ -17,14 +17,24 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // Full-Screen Toggle
     const fullscreenBtn = document.getElementById("fullscreen-btn");
+    const exitFullscreenBtn = document.getElementById("exit-fullscreen-btn");
     const controls = document.querySelector(".controls");
 
     if (fullscreenBtn) {
         fullscreenBtn.addEventListener("click", () => {
             controls.classList.toggle("fullscreen");
+            fullscreenBtn.style.display = "none";  // Hide full-screen button
+            exitFullscreenBtn.style.display = "inline-block";  // Show exit button
         });
     }
-
+// Exit Full-Screen Mode
+if (exitFullscreenBtn) {
+    exitFullscreenBtn.addEventListener("click", () => {
+        controls.classList.remove("fullscreen");
+        fullscreenBtn.style.display = "inline-block";  // Show full-screen button
+        exitFullscreenBtn.style.display = "none";  // Hide exit button
+    });
+}
     // Save Journal Entries
     const saveBtn = document.getElementById("save-btn");
     const journalTitleInput = document.getElementById("journal-title");
