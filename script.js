@@ -56,3 +56,31 @@ function loadEntries() {
 
 // Load entries when the page loads
 document.addEventListener("DOMContentLoaded", loadEntries);
+// Display the entries (Add this to your script to display saved entries)
+function displayEntries() {
+    const entries = JSON.parse(localStorage.getItem("entries")) || [];
+    const entryList = document.getElementById("entryList");
+    entryList.innerHTML = ""; // Clear the current list
+
+    // Loop through entries and create delete buttons
+    entries.forEach((entry, index) => {
+        const entryDiv = document.createElement("div");
+        entryDiv.textContent = entry;
+        
+        const deleteButton = document.createElement("button");
+        deleteButton.textContent = "Delete";
+        deleteButton.addEventListener("click", function() {
+            deleteEntry(index);
+        });
+
+        entryDiv.appendChild(deleteButton);
+        entryList.appendChild(entryDiv);
+    });
+}
+
+
+
+// Initial display of entries when the page loads (Add this if not already present)
+window.onload = function() {
+    displayEntries();
+};
