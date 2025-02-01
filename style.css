@@ -101,3 +101,20 @@ button:hover {
 .dark-mode #save-btn {
     background-color: #8b5e3c; /* Earthy brown background for save button in dark mode */
 }
+/* Ensure the layout is responsive */
+@media (max-width: 768px) {
+    body {
+        padding: 10px;
+    }
+
+    .controls input,
+    .controls textarea,
+    button {
+        width: 100%;
+        font-size: 14px;
+    }
+
+    #save-btn {
+        width: 100%;
+    }
+}
