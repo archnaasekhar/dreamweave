@@ -197,3 +197,75 @@ function changeTextColor() {
     document.execCommand("foreColor", false, color);
 }
 
+document.addEventListener("DOMContentLoaded", function () {
+    const todoInput = document.getElementById("todo-input");
+    const addTaskBtn = document.getElementById("add-task-btn");
+    const todoList = document.getElementById("todo-list");
+
+    // Get today's date in YYYY-MM-DD format
+    const today = new Date().toISOString().split("T")[0];
+
+    // Retrieve stored data
+    let storedData = JSON.parse(localStorage.getItem("todoData")) || {};
+    
+    // ✅ Check if the stored date matches today
+    if (storedData.date !== today) {
+        localStorage.setItem("todoData", JSON.stringify({ date: today, tasks: [] })); // Reset for new day
+        storedData = { date: today, tasks: [] };
+    }
+
+    let tasks = storedData.tasks;
+
+    // ✅ Load tasks for today
+    function loadTasks() {
+        todoList.innerHTML = ""; // Clear old list
+        tasks.forEach((task, index) => {
+            const li = document.createElement("li");
+
+            // Create Checkbox
+            const checkbox = document.createElement("input");
+            checkbox.type = "checkbox";
+            checkbox.checked = task.completed;
+            checkbox.addEventListener("change", () => {
+                tasks[index].completed = checkbox.checked;
+                saveTasks();
+            });
+
+            // Task Text
+            const taskText = document.createElement("span");
+            taskText.textContent = task.text;
+            if (task.completed) {
+                taskText.style.textDecoration = "line-through"; // Strikethrough completed tasks
+            }
+
+            // Update text style when checkbox is clicked
+            checkbox.addEventListener("change", () => {
+                taskText.style.textDecoration = checkbox.checked ? "line-through" : "none";
+            });
+
+            // Append elements
+            li.appendChild(checkbox);
+            li.appendChild(taskText);
+            todoList.appendChild(li);
+        });
+    }
+
+    // ✅ Save tasks to local storage
+    function saveTasks() {
+        localStorage.setItem("todoData", JSON.stringify({ date: today, tasks }));
+    }
+
+    // ✅ Add a new task
+    addTaskBtn.addEventListener("click", function () {
+        const taskText = todoInput.value.trim();
+        if (taskText) {
+            tasks.push({ text: taskText, completed: false });
+            saveTasks();
+            loadTasks();
+            todoInput.value = ""; // Clear input field
+        }
+    });
+
+    // Load today's tasks on page load
+    loadTasks();
+});

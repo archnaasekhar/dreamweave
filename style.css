@@ -199,3 +199,31 @@ body.dark-mode #calendar .day.selected {
 }
 
 
+.todo-container {
+    margin-top: 20px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    width: 300px;
+}
+
+.todo-container input, .todo-container button {
+    margin: 5px;
+    padding: 8px;
+}
+
+#todo-list {
+    list-style: none;
+    padding: 0;
+}
+
+#todo-list li {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 5px 0;
+}
+
+#todo-list input[type="checkbox"] {
+    cursor: pointer;
+}
