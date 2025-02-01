@@ -86,24 +86,62 @@ button:hover {
     background-color: #7f8b4b;
 }
 
+/* Full-Screen Mode */
+.fullscreen #journal-input {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    padding: 20px;
+    font-size: 18px;
+    z-index: 1000;
+    background-color: #fff;
+    border: none;
+    border-radius: 0;
+}
+
 /* Entries Section */
 #entries-container {
     width: 100%;
     max-width: 600px;
     margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
 }
 
+/* Card Styling for Entries */
 .entry {
-    background-color: #e9d8a6;
-    border: 1px solid #c3a48d;
-    padding: 15px;
-    margin-bottom: 10px;
+    background-color: #fff;
+    border: 1px solid #c3a48d; /* Light brown border */
+    padding: 20px;
     border-radius: 8px;
-    transition: background-color 0.3s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Soft shadow for card */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    cursor: pointer;
 }
 
 .entry:hover {
-    background-color: #d0c8a1;
+    transform: translateY(-5px); /* Slightly raise card on hover */
+    box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2); /* Darker shadow on hover */
+}
+
+.entry h3 {
+    font-size: 20px;
+    margin-bottom: 10px;
+    color: #4e3629;
+}
+
+.entry p {
+    font-size: 16px;
+    color: #7f6749;
+}
+
+.timestamp {
+    font-size: 14px;
+    color: #b78a56; /* Lighter brown for timestamp */
+    text-align: right;
 }
 
 /* Responsive Design */

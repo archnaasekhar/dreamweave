@@ -13,8 +13,16 @@ document.addEventListener("DOMContentLoaded", function () {
         if (localStorage.getItem("dark-mode") === "true") {
             body.classList.add("dark-mode");
         }
-    } else {
-        console.error("Dark Mode button not found!");
+    }
+
+    // Full-Screen Toggle
+    const fullscreenBtn = document.getElementById("fullscreen-btn");
+    const controls = document.querySelector(".controls");
+
+    if (fullscreenBtn) {
+        fullscreenBtn.addEventListener("click", () => {
+            controls.classList.toggle("fullscreen");
+        });
     }
 
     // Save Journal Entries
@@ -43,11 +51,9 @@ document.addEventListener("DOMContentLoaded", function () {
                 journalInput.value = "";
             }
         });
-    } else {
-        console.error("Save button not found!");
     }
 
-    // Display saved entries
+    // Display saved entries as cards
     function displayEntry(title, text, timestamp) {
         const entryDiv = document.createElement("div");
         entryDiv.classList.add("entry");
