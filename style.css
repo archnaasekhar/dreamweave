@@ -168,3 +168,34 @@ body.dark-mode .mood-label {
 body.dark-mode #calendar .day.selected {
   background-color: #444;
 }
+
+.text-formatting {
+    margin-bottom: 10px;
+}
+
+.text-formatting button, #color-picker {
+    margin: 5px;
+    padding: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    border: none;
+    background-color: #ddd;
+    border-radius: 5px;
+}
+
+.text-formatting button:hover {
+    background-color: #ccc;
+}
+
+#journal-title, #journal-input {
+    border: 1px solid #ccc;
+    padding: 10px;
+    min-height: 50px;
+}
+
+#journal-input:empty:before, #journal-title:empty:before {
+    content: attr(placeholder);
+    color: gray;
+}
+
+
