@@ -5,119 +5,116 @@ body {
     background-color: #f4f1e1; /* Light beige background */
     color: #4e3629; /* Dark brown text */
     transition: background-color 0.3s ease, color 0.3s ease;
-    margin: 0;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
 }
 
-/* Controls Container for input fields */
-.controls {
-    width: 100%;
-    max-width: 600px;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    align-items: center;
+/* Dark Mode */
+.dark-mode {
+    background-color: #2e2b26; /* Dark brown background */
+    color: #d8e2dc; /* Light beige text */
 }
 
-/* Title Input */
-#journal-title {
-    width: 100%;
-    font-size: 18px;
-    padding: 10px;
-    border: 2px solid #8b5e3c;
-    border-radius: 5px;
-    text-align: center;
-}
-
-/* Entry Text Area */
-#journal-input {
-    width: 100%;
-    height: 150px;
-    padding: 10px;
-    font-size: 16px;
-    border: 2px solid #8b5e3c;
-    border-radius: 5px;
-    resize: none;
-}
-
-/* Button Container */
-.button-container {
-    display: flex;
-    gap: 10px;
-    justify-content: center;
-    width: 100%;
-    margin-top: 10px;
-}
-
-/* Button Styling */
+/* Button Styles */
 button {
     padding: 10px 20px;
-    background-color: #4b8f29;
+    background-color: #4b8f29; /* Green background */
     color: white;
     border: none;
     border-radius: 5px;
     cursor: pointer;
     font-size: 16px;
+    margin-top: 10px;
     transition: background-color 0.3s ease;
 }
 
 button:hover {
-    background-color: #3e7022;
+    background-color: #3e7022; /* Darker green on hover */
 }
 
-/* Save Button */
+/* Save Button Styling */
 #save-btn {
-    background-color: #8b5e3c;
+    background-color: #8b5e3c; /* Earthy brown background for save button */
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-size: 16px;
+    border-radius: 5px;
+    margin-top: 10px;
+    transition: background-color 0.3s ease;
 }
 
 #save-btn:hover {
-    background-color: #6d4628;
+    background-color: #6d4628; /* Darker brown on hover */
 }
 
-/* Dark Mode Styling */
-.dark-mode {
-    background-color: #2e2b26;
-    color: #d8e2dc;
-}
-
-.dark-mode button {
-    background-color: #7f8b4b;
-}
-
-/* Entries Section */
-#entries-container {
-    width: 100%;
-    max-width: 600px;
-    margin-top: 20px;
-}
-
+/* Entry Styling */
 .entry {
-    background-color: #e9d8a6;
-    border: 1px solid #c3a48d;
+    background-color: #e9d8a6; /* Pale yellow background */
+    border: 1px solid #c3a48d; /* Light brown border */
     padding: 15px;
-    margin-bottom: 10px;
+    margin-bottom: 20px;
     border-radius: 8px;
     transition: background-color 0.3s ease;
 }
 
 .entry:hover {
-    background-color: #d0c8a1;
+    background-color: #d0c8a1; /* Slightly darker on hover */
 }
 
-/* Responsive Design */
+/* Timestamp Styling */
+.timestamp {
+    font-size: 12px;
+    color: #7f6749; /* Light brown color */
+}
+
+/* Delete Button Styling */
+.delete-btn {
+    background-color: #9c2a2a; /* Red background */
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    cursor: pointer;
+    font-size: 14px;
+    border-radius: 5px;
+    margin-top: 10px;
+    transition: background-color 0.3s ease;
+}
+
+.delete-btn:hover {
+    background-color: #7f1f1f; /* Darker red on hover */
+}
+
+/* Dark Mode Adjustments for Buttons and Entries */
+.dark-mode button {
+    background-color: #4b8f29; /* Green background */
+}
+
+.dark-mode .entry {
+    background-color: #4b3f31; /* Darker brown entry background */
+    border: 1px solid #6b4f34; /* Darker brown border */
+}
+
+.dark-mode .delete-btn {
+    background-color: #9c2a2a; /* Darker red for delete in dark mode */
+}
+
+.dark-mode #save-btn {
+    background-color: #8b5e3c; /* Earthy brown background for save button in dark mode */
+}
+/* Ensure the layout is responsive */
 @media (max-width: 768px) {
-    .controls {
-        width: 90%;
+    body {
+        padding: 10px;
     }
 
-    .button-container {
-        flex-direction: column;
-        width: 100%;
-    }
-
+    .controls input,
+    .controls textarea,
     button {
+        width: 100%;
+        font-size: 14px;
+    }
+
+    #save-btn {
         width: 100%;
     }
 }
