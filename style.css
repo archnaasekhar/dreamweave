@@ -121,3 +121,20 @@ button:hover {
         width: 100%;
     }
 }
+.text-formatting {
+    margin-bottom: 10px;
+}
+
+.text-formatting button {
+    margin: 5px;
+    padding: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    border: none;
+    background-color: #ddd;
+    border-radius: 5px;
+}
+
+.text-formatting button:hover {
+    background-color: #ccc;
+}

@@ -73,4 +73,6 @@ document.addEventListener("DOMContentLoaded", function () {
         displayEntry(entry.title, entry.text, entry.timestamp);
     });
 });
-
+    function formatText(command) {
+        document.execCommand(command, false, null);
+}
