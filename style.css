@@ -106,18 +106,65 @@ button:hover {
     background-color: #d0c8a1;
 }
 
-/* Responsive Design */
-@media (max-width: 768px) {
-    .controls {
-        width: 90%;
-    }
+/* Calendar Layout */
+#calendar-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 30px;
+}
 
-    .button-container {
-        flex-direction: column;
-        width: 100%;
-    }
+#calendar {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 10px;
+  margin-top: 20px;
+}
 
-    button {
-        width: 100%;
-    }
+.weekday {
+  text-align: center;
+  font-weight: bold;
+}
+
+.day {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.mood-slider {
+  width: 80%;
+  margin: 10px 0;
+}
+
+.mood-label {
+  font-size: 1.2em;
+}
+
+.day:hover {
+  background-color: #f0f0f0;
+}
+
+/* Dark Mode Calendar */
+body.dark-mode #calendar .day {
+  background-color: #333;
+  color: #fff;
+}
+
+body.dark-mode .mood-slider {
+  background-color: #555;
+  color: #fff;
+}
+
+body.dark-mode .mood-label {
+  color: #fff;
+}
+
+body.dark-mode #calendar .day.selected {
+  background-color: #444;
 }

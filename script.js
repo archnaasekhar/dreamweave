@@ -72,5 +72,118 @@ document.addEventListener("DOMContentLoaded", function () {
     journalEntries.forEach(entry => {
         displayEntry(entry.title, entry.text, entry.timestamp);
     });
+
+    // Calendar (with mood tracker only in the calendar, not in journal entries)
+    const calendarContainer = document.getElementById('calendar');
+    let currentMonth = new Date().getMonth();  // Get current month (0-11)
+    let currentYear = new Date().getFullYear(); // Get current year
+
+    // Function to generate the calendar
+    function generateCalendar(month, year) {
+        const weekdays = ['S', 'M', 'T', 'W', 'T', 'F', 'S']; // Weekday initials, Sunday as 0
+        calendarContainer.innerHTML = ''; // Clear the calendar container before reloading it
+
+        // Create the month title
+        const monthTitle = document.createElement('h2');
+        monthTitle.textContent = `${new Date(year, month).toLocaleString('default', { month: 'long' })} ${year}`;
+        calendarContainer.appendChild(monthTitle);
+
+        // Add navigation buttons for previous and next months
+        const navigationDiv = document.createElement('div');
+        navigationDiv.classList.add('calendar-navigation');
+
+        const prevMonthBtn = document.createElement('button');
+        prevMonthBtn.textContent = 'Previous';
+        prevMonthBtn.addEventListener('click', () => {
+            // Decrease the month and update year if needed
+            if (currentMonth === 0) {
+                currentMonth = 11;
+                currentYear--;
+            } else {
+                currentMonth--;
+            }
+            generateCalendar(currentMonth, currentYear);
+        });
+
+        const nextMonthBtn = document.createElement('button');
+        nextMonthBtn.textContent = 'Next';
+        nextMonthBtn.addEventListener('click', () => {
+            // Increase the month and update year if needed
+            if (currentMonth === 11) {
+                currentMonth = 0;
+                currentYear++;
+            } else {
+                currentMonth++;
+            }
+            generateCalendar(currentMonth, currentYear);
+        });
+
+        navigationDiv.appendChild(prevMonthBtn);
+        navigationDiv.appendChild(nextMonthBtn);
+        calendarContainer.appendChild(navigationDiv);
+
+        const calendarGrid = document.createElement('div');
+        calendarGrid.id = 'calendar';
+        calendarContainer.appendChild(calendarGrid);
+
+        // Display weekday initials (S, M, T, W, T, F, S)
+        weekdays.forEach(day => {
+            const dayDiv = document.createElement('div');
+            dayDiv.classList.add('weekday');
+            dayDiv.textContent = day;
+            calendarGrid.appendChild(dayDiv);
+        });
+
+        // Get the number of days in the current month
+        const daysInMonth = new Date(year, month + 1, 0).getDate();
+
+        // Get the starting weekday of the first day of the month
+        const firstDayOfMonth = new Date(year, month, 1).getDay(); // 0 (Sunday) to 6 (Saturday)
+
+        // Adjust so the day of the week starts correctly (Sunday = 0, Saturday = 6)
+        const correctFirstDay = firstDayOfMonth === 0 ? 7 : firstDayOfMonth;
+
+        // Generate empty cells for days before the first day of the month
+        for (let i = 0; i < correctFirstDay - 1; i++) {
+            const emptyCell = document.createElement('div');
+            emptyCell.classList.add('day');
+            calendarGrid.appendChild(emptyCell);
+        }
+
+        // Generate the days of the month
+        for (let day = 1; day <= daysInMonth; day++) {
+            const moodCell = document.createElement('div');
+            moodCell.classList.add('day');
+            moodCell.textContent = day; // Display the day number
+
+            // Mood dropdown slider (circle)
+            const moodSlider = document.createElement('select');
+            moodSlider.classList.add('mood-slider');
+
+            const moods = ['😊', '😐', '😢', '😡'];
+            moods.forEach(mood => {
+                const option = document.createElement('option');
+                option.value = mood;
+                option.textContent = mood;
+                moodSlider.appendChild(option);
+            });
+
+            moodSlider.addEventListener('change', function () {
+                moodCell.textContent = `${day} ${moodSlider.value}`; // Display selected mood with day number
+            });
+
+            moodCell.appendChild(moodSlider);
+            calendarGrid.appendChild(moodCell);
+        }
+    }
+
+    // Initially generate the current month calendar
+    generateCalendar(currentMonth, currentYear);
 });
+
+
+    
+
+
+
 
