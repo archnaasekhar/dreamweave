@@ -22,7 +22,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     if (fullscreenBtn) {
         fullscreenBtn.addEventListener("click", () => {
-            controls.classList.toggle("fullscreen");
+            controls.classList.add("fullscreen"); 
             fullscreenBtn.style.display = "none";  // Hide full-screen button
             exitFullscreenBtn.style.display = "inline-block";  // Show exit button
         });
