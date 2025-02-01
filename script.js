@@ -28,7 +28,7 @@ document.addEventListener("DOMContentLoaded", function () {
     if (saveBtn) {
         saveBtn.addEventListener("click", () => {
             const title = journalTitleInput.value.trim();
-            const text = journalInput.value.trim();
+            const text = journalInput.innerHTML;
 
             if (title && text) {
                 const timestamp = new Date().toLocaleString();
@@ -75,4 +75,8 @@ document.addEventListener("DOMContentLoaded", function () {
 });
     function formatText(command) {
         document.execCommand(command, false, null);
+}
+function changeTextColor() {
+    let color = document.getElementById("color-picker").value;
+    document.execCommand("foreColor", false, color);
 }
