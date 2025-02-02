@@ -27,8 +27,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
     if (saveBtn) {
         saveBtn.addEventListener("click", () => {
-            const title = journalTitleInput.value.trim();
-            const text = journalInput.innerHTML;
+            const title = journalTitleInput.innerHTML.trim();
+            const text = journalInput.innerHTML.trim();
 
             if (title && text) {
                 const timestamp = new Date().toLocaleString();
@@ -37,10 +37,10 @@ document.addEventListener("DOMContentLoaded", function () {
                 journalEntries.push(newEntry);
                 localStorage.setItem("journalEntries", JSON.stringify(journalEntries));
 
-                displayEntry(title, text, timestamp);
+                refreshEntries();
 
-                journalTitleInput.value = "";
-                journalInput.value = "";
+                journalTitleInput.innerHTML = "";
+                journalInput.innerHTML = "";
             }
         });
     } else {
@@ -53,10 +53,10 @@ document.addEventListener("DOMContentLoaded", function () {
         entryDiv.classList.add("entry");
 
         const titleDiv = document.createElement("h3");
-        titleDiv.textContent = title;
+        titleDiv.innerHTML = title;
 
         const textDiv = document.createElement("p");
-        textDiv.textContent = text;
+        textDiv.innerHTML = text;
 
         const timestampDiv = document.createElement("div");
         timestampDiv.classList.add("timestamp");
