@@ -231,3 +231,16 @@ body.dark-mode #calendar .day.selected {
 #todo-list input[type="checkbox"] {
     cursor: pointer;
 }
+.delete-btn {
+    margin-top: 10px;
+    padding: 5px 10px;
+    background-color: red;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.delete-btn:hover {
+    background-color: darkred;
+}

@@ -48,7 +48,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     // Display saved entries
-    function displayEntry(title, text, timestamp) {
+    function displayEntry(title, text, timestamp,index) {
         const entryDiv = document.createElement("div");
         entryDiv.classList.add("entry");
 
@@ -62,9 +62,17 @@ document.addEventListener("DOMContentLoaded", function () {
         timestampDiv.classList.add("timestamp");
         timestampDiv.textContent = timestamp;
 
+        const deleteBtn = document.createElement("button");
+        deleteBtn.textContent = "Delete";
+        deleteBtn.classList.add("delete-btn");
+        deleteBtn.onclick = function () {
+            deleteEntry(index);
+        };
+
         entryDiv.appendChild(titleDiv);
         entryDiv.appendChild(textDiv);
         entryDiv.appendChild(timestampDiv);
+        entryDiv.appendChild(deleteBtn); // Add Delete Button
 
         entriesContainer.appendChild(entryDiv);
     }
@@ -180,6 +188,19 @@ document.addEventListener("DOMContentLoaded", function () {
     // Initially generate the current month calendar
     generateCalendar(currentMonth, currentYear);
 });
+function deleteEntry(index) {
+    journalEntries.splice(index, 1); // Remove entry from the array
+    localStorage.setItem("journalEntries", JSON.stringify(journalEntries)); // Update storage
+    refreshEntries(); // Refresh the UI
+}
+
+// Function to refresh and display updated entries
+function refreshEntries() {
+    entriesContainer.innerHTML = ""; // Clear the container
+    journalEntries.forEach((entry, index) => {
+        displayEntry(entry.title, entry.text, entry.timestamp, index);
+    });
+}
 
 
 
